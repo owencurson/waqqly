@@ -1,0 +1,10 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "CosmosDBEndpointUri": "https://<your-cosmos-db-account>.documents.azure.com:443/",
+        "CosmosDBPrimaryKey": "<your-primary-key>",
+        "CosmosDBDatabaseId": "Waqqly"
+    }
+}
