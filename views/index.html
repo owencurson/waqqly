@@ -16,24 +16,21 @@
     </header>
     <main>
         <section id="register-pet">
-            <h2>Register Pet</h2>
-            <form id="pet-form">
-                <label for="pet-name">Pet Name:</label>
-                <input type="text" id="pet-name" name="pet-name" required>
-                <label for="pet-breed">Pet Breed:</label>
-                <input type="text" id="pet-breed" name="pet-breed" required>
-                <button type="submit">Register Pet</button>
-            </form>
-        </section>
-        <section id="register-dog-walker">
-            <h2>Register Dog Walker</h2>
-            <form id="walker-form">
-                <label for="walker-name">Name:</label>
-                <input type="text" id="walker-name" name="walker-name" required>
-                <label for="walker-location">Location:</label>
-                <input type="text" id="walker-location" name="walker-location" required>
-                <button type="submit">Register Dog Walker</button>
-            </form>
+<!-- index.html -->
+<form id="pet-form">
+    <input type="text" id="pet-name" placeholder="Pet Name">
+    <input type="text" id="pet-breed" placeholder="Pet Breed">
+    <button type="submit">Submit</button>
+</form>
+
+<form id="walker-form">
+    <input type="text" id="walker-name" placeholder="Walker Name">
+    <input type="text" id="walker-location" placeholder="Walker Location">
+    <button type="submit">Submit</button>
+</form>
+
+<script src="main.js"></script>
+
         </section>
     </main>
     <script src="scripts/main.js"></script>
