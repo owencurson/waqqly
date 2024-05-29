@@ -3,16 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waqqly</title>
+    <title>Waqq.ly - Find Dog Walkers</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <header>
-        <h1>Waqqly Dog Walking</h1>
+        <h1>Waqq.ly</h1>
+        <nav>
+            <a href="#register-pet">Register Pet</a>
+            <a href="#register-dog-walker">Register Dog Walker</a>
+        </nav>
     </header>
     <main>
-        <p>Just for dogs and only dogs</p>
-        <button>Click Me</button>
+        <section id="register-pet">
+            <h2>Register Pet</h2>
+            <form id="pet-form">
+                <label for="pet-name">Pet Name:</label>
+                <input type="text" id="pet-name" name="pet-name" required>
+                <label for="pet-breed">Pet Breed:</label>
+                <input type="text" id="pet-breed" name="pet-breed" required>
+                <button type="submit">Register Pet</button>
+            </form>
+        </section>
+        <section id="register-dog-walker">
+            <h2>Register Dog Walker</h2>
+            <form id="walker-form">
+                <label for="walker-name">Name:</label>
+                <input type="text" id="walker-name" name="walker-name" required>
+                <label for="walker-location">Location:</label>
+                <input type="text" id="walker-location" name="walker-location" required>
+                <button type="submit">Register Dog Walker</button>
+            </form>
+        </section>
     </main>
     <script src="scripts/main.js"></script>
 </body>
