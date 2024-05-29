@@ -3,7 +3,7 @@ document.getElementById('pet-form').addEventListener('submit', async (event) => 
     const petName = document.getElementById('pet-name').value;
     const petBreed = document.getElementById('pet-breed').value;
     
-    const response = await fetch('https://waqqlydog.azurewebsites.net/api/registerPet', {
+    const response = await fetch('https://ambitious-sky-0e5a4c303.5.azurestaticapps.net/api/registerPet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ document.getElementById('walker-form').addEventListener('submit', async (event) 
     const walkerName = document.getElementById('walker-name').value;
     const walkerLocation = document.getElementById('walker-location').value;
     
-    const response = await fetch('https://waqqlydog.azurewebsites.net/api/registerWalker', {
+    const response = await fetch('https://ambitious-sky-0e5a4c303.5.azurestaticapps.net/api/registerWalker', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,4 +29,3 @@ document.getElementById('walker-form').addEventListener('submit', async (event) 
     const result = await response.json();
     alert(result.message);
 });
-
