@@ -14,10 +14,9 @@ public static class GetWalkers
     private static readonly string EndpointUri = Environment.GetEnvironmentVariable("CosmosDBEndpointUri");
     private static readonly string PrimaryKey = Environment.GetEnvironmentVariable("CosmosDBPrimaryKey");
     private static readonly string DatabaseId = Environment.GetEnvironmentVariable("CosmosDBDatabaseId");
-    private static readonly string ContainerId = "DogWalkers";
-
     private static CosmosClient cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
-    private static Container container = cosmosClient.GetContainer(DatabaseId, ContainerId);
+    private static Database database = cosmosClient.GetDatabase(DatabaseId);
+    private static Container container = database.GetContainer("DogWalkers");
 
     [FunctionName("GetWalkers")]
     public static async Task<IActionResult> Run(

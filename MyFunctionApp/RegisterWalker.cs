@@ -9,43 +9,42 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Microsoft.Azure.Cosmos;
 
-public static class RegisterPet
+public static class RegisterWalker
 {
     private static readonly string EndpointUri = Environment.GetEnvironmentVariable("CosmosDBEndpointUri");
     private static readonly string PrimaryKey = Environment.GetEnvironmentVariable("CosmosDBPrimaryKey");
     private static readonly string DatabaseId = Environment.GetEnvironmentVariable("CosmosDBDatabaseId");
-    private static readonly string ContainerId = "Pets";
-
     private static CosmosClient cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
-    private static Container container = cosmosClient.GetContainer(DatabaseId, ContainerId);
+    private static Database database = cosmosClient.GetDatabase(DatabaseId);
+    private static Container container = database.GetContainer("DogWalkers");
 
-    [FunctionName("RegisterPet")]
+    [FunctionName("RegisterWalker")]
     public static async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "registerPet")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "registerWalker")] HttpRequest req,
         ILogger log)
     {
-        log.LogInformation("RegisterPet function processed a request.");
+        log.LogInformation("RegisterWalker function processed a request.");
 
         try
         {
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             dynamic data = JsonConvert.DeserializeObject(requestBody);
 
-            if (string.IsNullOrEmpty(data?.petName) || string.IsNullOrEmpty(data?.petBreed))
+            if (string.IsNullOrEmpty(data?.walkerName) || string.IsNullOrEmpty(data?.walkerLocation))
             {
-                return new BadRequestObjectResult("Invalid input. Both petName and petBreed are required.");
+                return new BadRequestObjectResult("Invalid input. Both walkerName and walkerLocation are required.");
             }
 
-            var pet = new
+            var walker = new
             {
                 id = Guid.NewGuid().ToString(),
-                name = data.petName,
-                breed = data.petBreed
+                name = data.walkerName,
+                location = data.walkerLocation
             };
 
-            await container.CreateItemAsync(pet, new PartitionKey(pet.id));
+            await container.CreateItemAsync(walker);
 
-            return new OkObjectResult(new { message = "Pet registered successfully!" });
+            return new OkObjectResult(new { message = "Walker registered successfully!" });
         }
         catch (Exception ex)
         {
