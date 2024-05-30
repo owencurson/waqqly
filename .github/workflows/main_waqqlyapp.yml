@@ -28,6 +28,9 @@ jobs:
       - name: Publish
         run: dotnet publish --configuration Release --output ./MyFunctionApp/bin/Release/net8.0/publish ./MyFunctionApp/MyFunctionApp.csproj
 
+      - name: Verify Publish Directory
+        run: ls -al ./MyFunctionApp/bin/Release/net8.0/publish
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
