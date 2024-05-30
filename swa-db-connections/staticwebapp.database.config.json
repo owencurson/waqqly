@@ -2,9 +2,9 @@
   "$schema": "https://github.com/Azure/data-api-builder/releases/download/v0.9.7/dab.draft.schema.json",
   "data-source": {
     "database-type": "cosmosdb_nosql",
-    "connection-string": "",
+    "connection-string": "AccountEndpoint=https://waqqly-dog.documents.azure.com:443/;AccountKey=4q30iJfej5fqtVApeUNBLavsRUoRvrxMJcLsDm8ii6CJIDokdOBCqLOk5WiHFIvYieGB9FWrITxQACDbmWDJZQ==;",
     "options": {
-      "database": "waqqly-dog",
+      "database": "WaqqlyDB",
       "container": "Pets",
       "schema": "staticwebapp.database.schema.gql"
     }
@@ -22,7 +22,7 @@
     },
     "host": {
       "cors": {
-        "origins": [],
+        "origins": ["https://your-allowed-origin.com"],
         "allow-credentials": false
       },
       "authentication": {
@@ -31,5 +31,58 @@
       "mode": "production"
     }
   },
-  "entities": {}
+  "entities": {
+    "Pets": {
+      "source": "Pets",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": ["read", "insert"]
+        }
+      ],
+      "graphql": {
+        "type": "object",
+        "fields": {
+          "id": {
+            "type": "String",
+            "nullable": false
+          },
+          "name": {
+            "type": "String",
+            "nullable": false
+          },
+          "breed": {
+            "type": "String",
+            "nullable": false
+          }
+        }
+      }
+    },
+    "DogWalkers": {
+      "source": "DogWalkers",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": ["read", "insert"]
+        }
+      ],
+      "graphql": {
+        "type": "object",
+        "fields": {
+          "id": {
+            "type": "String",
+            "nullable": false
+          },
+          "name": {
+            "type": "String",
+            "nullable": false
+          },
+          "location": {
+            "type": "String",
+            "nullable": false
+          }
+        }
+      }
+    }
+  }
 }
