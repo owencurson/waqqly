@@ -3,7 +3,7 @@ document.getElementById('pet-form').addEventListener('submit', async (event) => 
     const petName = document.getElementById('pet-name').value;
     const petBreed = document.getElementById('pet-breed').value;
 
-    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/registerPet', {
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/RegisterPet', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -20,7 +20,7 @@ document.getElementById('walker-form').addEventListener('submit', async (event) 
     const walkerName = document.getElementById('walker-name').value;
     const walkerLocation = document.getElementById('walker-location').value;
 
-    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/registerWalker', {
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/rRegisterWalker', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ document.getElementById('walker-form').addEventListener('submit', async (event) 
 });
 
 async function fetchPets() {
-    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/getPets');
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/GetPet');
     const pets = await response.json();
     const petsList = document.getElementById('pets-list');
     petsList.innerHTML = ''; // Clear existing list
@@ -45,7 +45,7 @@ async function fetchPets() {
 }
 
 async function fetchWalkers() {
-    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/getWalkers');
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/RegisterWalker/api/GetWalkers');
     const walkers = await response.json();
     const walkersList = document.getElementById('walkers-list');
     walkersList.innerHTML = ''; // Clear existing list
