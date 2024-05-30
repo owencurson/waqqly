@@ -1,75 +1,108 @@
+/* Reset default browser styles */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* Box sizing border-box for easier layout */
+* {
+    box-sizing: border-box;
+}
+
+/* Default font and background */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
+/* Container for layout */
 .container {
     width: 80%;
     margin: auto;
-    overflow: hidden;
+    padding: 20px;
 }
 
+/* Header styles */
 #main-header {
     background-color: #333;
     color: #fff;
-    padding-top: 30px;
-    min-height: 70px;
+    padding: 20px;
+    text-align: center;
     border-bottom: #0779e4 3px solid;
 }
 
 #main-header h1 {
-    text-align: center;
-    text-transform: uppercase;
-    margin: 0;
     font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
 }
 
+/* Form styles */
 form {
     background: #fff;
     padding: 20px;
-    margin: 20px 0;
+    margin-bottom: 20px;
     box-shadow: 0 0 10px 0 #ccc;
 }
 
 form div {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 form div label {
     display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 form div input[type="text"] {
-    width: 100%;
+    width: calc(100% - 22px); /* Adjust for padding */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-form div input[type="submit"] {
+form div button[type="submit"] {
     background: #0779e4;
     color: #fff;
-    padding: 10px;
+    padding: 10px 20px;
     border: 0;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-form div input[type="submit"]:hover {
+form div button[type="submit"]:hover {
     background: #055ab7;
 }
 
+/* Results section styles */
 #results {
-    margin: 20px 0;
-    padding: 20px;
     background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
     box-shadow: 0 0 10px 0 #ccc;
 }
 
 #results h2 {
     margin-top: 0;
+    margin-bottom: 10px;
 }
 
 #results ul {
