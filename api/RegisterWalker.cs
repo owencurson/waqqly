@@ -43,7 +43,7 @@ public static class RegisterWalker
                 location = data.walkerLocation
             };
 
-            await container.CreateItemAsync(walker);
+            await container.CreateItemAsync(walker, new PartitionKey(walker.id));
 
             return new OkObjectResult(new { message = "Walker registered successfully!" });
         }

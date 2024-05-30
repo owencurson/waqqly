@@ -43,7 +43,7 @@ public static class RegisterPet
                 breed = data.petBreed
             };
 
-            await container.CreateItemAsync(pet);
+            await container.CreateItemAsync(pet, new PartitionKey(pet.id));
 
             return new OkObjectResult(new { message = "Pet registered successfully!" });
         }
