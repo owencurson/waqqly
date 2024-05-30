@@ -4,7 +4,7 @@
     "database-type": "cosmosdb_nosql",
     "connection-string": "",
     "options": {
-      "database": "dog_walkers",
+      "database": "waqqly-dog",
       "container": null,
       "schema": "staticwebapp.database.schema.gql"
     }
