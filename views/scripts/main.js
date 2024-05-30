@@ -12,6 +12,7 @@ document.getElementById('pet-form').addEventListener('submit', async (event) => 
     });
     const result = await response.json();
     alert(result.message);
+    fetchPets(); // Refresh the pet list after registration
 });
 
 document.getElementById('walker-form').addEventListener('submit', async (event) => {
@@ -28,4 +29,34 @@ document.getElementById('walker-form').addEventListener('submit', async (event) 
     });
     const result = await response.json();
     alert(result.message);
+    fetchWalkers(); // Refresh the walker list after registration
+});
+
+async function fetchPets() {
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/getPets');
+    const pets = await response.json();
+    const petsList = document.getElementById('pets-list');
+    petsList.innerHTML = ''; // Clear existing list
+    pets.forEach(pet => {
+        const petItem = document.createElement('div');
+        petItem.textContent = `Name: ${pet.name}, Breed: ${pet.breed}`;
+        petsList.appendChild(petItem);
+    });
+}
+
+async function fetchWalkers() {
+    const response = await fetch('https://waqqlyapp.azurewebsites.net/api/getWalkers');
+    const walkers = await response.json();
+    const walkersList = document.getElementById('walkers-list');
+    walkersList.innerHTML = ''; // Clear existing list
+    walkers.forEach(walker => {
+        const walkerItem = document.createElement('div');
+        walkerItem.textContent = `Name: ${walker.name}, Location: ${walker.location}`;
+        walkersList.appendChild(walkerItem);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchPets();
+    fetchWalkers();
 });
