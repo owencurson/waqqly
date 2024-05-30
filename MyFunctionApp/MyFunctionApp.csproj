@@ -1,19 +1,47 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <AzureFunctionsVersion>v4</AzureFunctionsVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.23.0" />
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.4.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="host.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="local.settings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
-</Project>
+name: .NET Core
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install dependencies
+        run: dotnet restore ./MyFunctionApp/MyFunctionApp.csproj
+
+      - name: Build
+        run: dotnet build --configuration Release ./MyFunctionApp/MyFunctionApp.csproj
+
+      - name: Run tests
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Publish
+        run: dotnet publish --configuration Release --output ./MyFunctionApp/bin/Release/net8.0/publish ./MyFunctionApp/MyFunctionApp.csproj
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Deploy to Azure Functions
+        uses: Azure/functions-action@v1
+        with:
+          app-name: 'YOUR_AZURE_FUNCTION_APP_NAME'
+          package: './MyFunctionApp/bin/Release/net8.0/publish'
+          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
