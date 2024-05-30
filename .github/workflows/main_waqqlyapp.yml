@@ -26,7 +26,7 @@ jobs:
         run: dotnet test --no-build --verbosity normal ./MyFunctionApp/MyFunctionApp.csproj
 
       - name: Publish
-        run: dotnet publish --configuration Release --output ./MyFunctionApp/publish ./MyFunctionApp/MyFunctionApp.csproj
+        run: dotnet publish --configuration Release --output ./MyFunctionApp/bin/Release/net8.0/publish ./MyFunctionApp/MyFunctionApp.csproj
 
   deploy:
     runs-on: ubuntu-latest
@@ -43,5 +43,5 @@ jobs:
         uses: Azure/functions-action@v1
         with:
           app-name: 'waqqlyapp'
-          package: './MyFunctionApp/publish'
+          package: './MyFunctionApp/bin/Release/net8.0/publish'
           publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE }}
