@@ -11,9 +11,9 @@ using Microsoft.Azure.Cosmos;
 
 public static class GetWalkers
 {
-    private static readonly string EndpointUri = "https://waqqly-dog.documents.azure.com:443/";
-    private static readonly string PrimaryKey = "4q30iJfej5fqtVApeUNBLavsRUoRvrxMJcLsDm8ii6CJIDokdOBCqLOk5WiHFIvYieGB9FWrITxQACDbmWDJZQ==";
-    private static readonly string DatabaseId = "WaqqlyDB";
+    private static readonly string EndpointUri = Environment.GetEnvironmentVariable("CosmosDBEndpointUri");
+    private static readonly string PrimaryKey = Environment.GetEnvironmentVariable("CosmosDBPrimaryKey");
+    private static readonly string DatabaseId = Environment.GetEnvironmentVariable("CosmosDBDatabaseId");
     private static readonly string ContainerId = "DogWalkers";
 
     private static CosmosClient cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
