@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -7,16 +8,16 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Azure.Cosmos;
-using Newtonsoft.Json;
 
 public static class GetPets
 {
-    private static readonly string EndpointUri = Environment.GetEnvironmentVariable("CosmosDBEndpointUri");
-    private static readonly string PrimaryKey = Environment.GetEnvironmentVariable("CosmosDBPrimaryKey");
-    private static readonly string DatabaseId = Environment.GetEnvironmentVariable("CosmosDBDatabaseId");
+    private static readonly string EndpointUri = "https://waqqly-dog.documents.azure.com:443/";
+    private static readonly string PrimaryKey = "4q30iJfej5fqtVApeUNBLavsRUoRvrxMJcLsDm8ii6CJIDokdOBCqLOk5WiHFIvYieGB9FWrITxQACDbmWDJZQ==";
+    private static readonly string DatabaseId = "WaqqlyDB";
+    private static readonly string ContainerId = "Pets";
+
     private static CosmosClient cosmosClient = new CosmosClient(EndpointUri, PrimaryKey);
-    private static Database database = cosmosClient.GetDatabase(DatabaseId);
-    private static Container container = database.GetContainer("Pets");
+    private static Container container = cosmosClient.GetContainer(DatabaseId, ContainerId);
 
     [FunctionName("GetPets")]
     public static async Task<IActionResult> Run(
@@ -25,21 +26,16 @@ public static class GetPets
     {
         log.LogInformation("GetPets function processed a request.");
 
-        var sqlQueryText = "SELECT * FROM c";
-        QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
-        FeedIterator<dynamic> queryResultSetIterator = container.GetItemQueryIterator<dynamic>(queryDefinition);
+        var query = new QueryDefinition("SELECT * FROM c");
+        var iterator = container.GetItemQueryIterator<dynamic>(query);
+        var results = new List<dynamic>();
 
-        List<dynamic> pets = new List<dynamic>();
-
-        while (queryResultSetIterator.HasMoreResults)
+        while (iterator.HasMoreResults)
         {
-            FeedResponse<dynamic> currentResultSet = await queryResultSetIterator.ReadNextAsync();
-            foreach (var pet in currentResultSet)
-            {
-                pets.Add(pet);
-            }
+            var response = await iterator.ReadNextAsync();
+            results.AddRange(response.ToList());
         }
 
-        return new OkObjectResult(pets);
+        return new OkObjectResult(results);
     }
 }
