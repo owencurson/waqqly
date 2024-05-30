@@ -23,7 +23,7 @@ jobs:
         run: dotnet build --configuration Release ./MyFunctionApp/MyFunctionApp.csproj
 
       - name: Run tests
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test --no-build --verbosity normal ./MyFunctionApp/MyFunctionApp.csproj
 
       - name: Publish
         run: dotnet publish --configuration Release --output ./MyFunctionApp/publish ./MyFunctionApp/MyFunctionApp.csproj
