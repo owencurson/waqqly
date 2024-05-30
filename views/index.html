@@ -7,50 +7,56 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <header>
+    <header id="main-header">
         <h1>Welcome to Waqq.ly</h1>
         <p>Find the best dog walkers in your area!</p>
     </header>
 
-    <section>
-        <h2>Register Your Pet</h2>
-        <form id="pet-form">
-            <label for="pet-name">Pet Name:</label>
-            <input type="text" id="pet-name" name="pet-name" required>
-            <br>
-            <label for="pet-breed">Pet Breed:</label>
-            <input type="text" id="pet-breed" name="pet-breed" required>
-            <br>
-            <button type="submit">Register Pet</button>
-        </form>
-    </section>
+    <div class="container">
+        <section>
+            <h2>Register Your Pet</h2>
+            <form id="pet-form">
+                <div>
+                    <label for="pet-name">Pet Name:</label>
+                    <input type="text" id="pet-name" name="pet-name" required>
+                </div>
+                <div>
+                    <label for="pet-breed">Pet Breed:</label>
+                    <input type="text" id="pet-breed" name="pet-breed" required>
+                </div>
+                <button type="submit">Register Pet</button>
+            </form>
+        </section>
 
-    <section>
-        <h2>Register as a Dog Walker</h2>
-        <form id="walker-form">
-            <label for="walker-name">Name:</label>
-            <input type="text" id="walker-name" name="walker-name" required>
-            <br>
-            <label for="walker-location">Location:</label>
-            <input type="text" id="walker-location" name="walker-location" required>
-            <br>
-            <button type="submit">Register Walker</button>
-        </form>
-    </section>
+        <section>
+            <h2>Register as a Dog Walker</h2>
+            <form id="walker-form">
+                <div>
+                    <label for="walker-name">Name:</label>
+                    <input type="text" id="walker-name" name="walker-name" required>
+                </div>
+                <div>
+                    <label for="walker-location">Location:</label>
+                    <input type="text" id="walker-location" name="walker-location" required>
+                </div>
+                <button type="submit">Register Walker</button>
+            </form>
+        </section>
 
-    <section>
-        <h2>Registered Pets</h2>
-        <div id="pets-list">
-            <!-- Pets will be displayed here -->
-        </div>
-    </section>
+        <section id="results">
+            <h2>Registered Pets</h2>
+            <ul id="pets-list">
+                <!-- Pets will be displayed here -->
+            </ul>
+        </section>
 
-    <section>
-        <h2>Registered Dog Walkers</h2>
-        <div id="walkers-list">
-            <!-- Dog walkers will be displayed here -->
-        </div>
-    </section>
+        <section id="results">
+            <h2>Registered Dog Walkers</h2>
+            <ul id="walkers-list">
+                <!-- Dog walkers will be displayed here -->
+            </ul>
+        </section>
+    </div>
 
     <script src="main.js"></script>
 </body>
