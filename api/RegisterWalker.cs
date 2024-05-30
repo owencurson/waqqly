@@ -39,12 +39,12 @@ public static class RegisterWalker
             {
                 id = Guid.NewGuid().ToString(),
                 name = data.walkerName,
-                location = data.walkerLocation  // Include location in the document
+                location = data.walkerLocation
             };
 
             await container.CreateItemAsync(walker);
 
-            return new OkObjectResult(new { message = "Walker registered successfully!" });
+            return new OkObjectResult(new { message = "Dog Walker registered successfully!" });
         }
         catch (Exception ex)
         {

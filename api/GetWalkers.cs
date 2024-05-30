@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -26,16 +25,21 @@ public static class GetWalkers
     {
         log.LogInformation("GetWalkers function processed a request.");
 
-        var query = new QueryDefinition("SELECT * FROM c");
-        var iterator = container.GetItemQueryIterator<dynamic>(query);
-        var results = new List<dynamic>();
+        var sqlQueryText = "SELECT * FROM c";
+        QueryDefinition queryDefinition = new QueryDefinition(sqlQueryText);
+        FeedIterator<dynamic> queryResultSetIterator = container.GetItemQueryIterator<dynamic>(queryDefinition);
 
-        while (iterator.HasMoreResults)
+        List<dynamic> walkers = new List<dynamic>();
+
+        while (queryResultSetIterator.HasMoreResults)
         {
-            var response = await iterator.ReadNextAsync();
-            results.AddRange(response.ToList());
+            FeedResponse<dynamic> currentResultSet = await queryResultSetIterator.ReadNextAsync();
+            foreach (var walker in currentResultSet)
+            {
+                walkers.Add(walker);
+            }
         }
 
-        return new OkObjectResult(results);
+        return new OkObjectResult(walkers);
     }
 }
