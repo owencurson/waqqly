@@ -5,7 +5,7 @@
     "connection-string": "",
     "options": {
       "database": "waqqly-dog",
-      "container": null,
+      "container": "Pets",
       "schema": "staticwebapp.database.schema.gql"
     }
   },
