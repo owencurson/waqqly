@@ -39,7 +39,7 @@ public static class RegisterWalker
             {
                 id = Guid.NewGuid().ToString(),
                 name = data.walkerName,
-                location = data.walkerLocation
+                location = data.walkerLocation  // Include location in the document
             };
 
             await container.CreateItemAsync(walker);
